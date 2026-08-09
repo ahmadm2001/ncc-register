@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كلية مركز النقب - التسجيل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #003583;
+    --navy-dark: #002a68;
+    --yellow: #FFC200;
+    --ink: #1c2b45;
+    --line: #d9dfe9;
+    --bg: #f4f6fa;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+  }
+  .card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0, 42, 104, 0.10);
+    border-top: 6px solid var(--yellow);
+    padding: 36px 28px 40px;
+  }
+  .logo {
+    display: block;
+    width: 170px;
+    margin: 0 auto 22px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--navy);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .field { margin-bottom: 16px; }
+  input {
+    width: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: #fbfcfe;
+    color: var(--ink);
+    transition: border-color .15s, box-shadow .15s;
+  }
+  input::placeholder { color: #8d99ad; }
+  input:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(0, 53, 131, 0.12);
+    background: #ffffff;
+  }
+  button {
+    width: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    background: var(--navy);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  button:hover { background: var(--navy-dark); }
+  button:active { transform: scale(0.985); }
+  .note {
+    text-align: center;
+    font-size: 13px;
+    color: #8d99ad;
+    margin-top: 18px;
+  }
+  /* success view */
+  .success { display: none; text-align: center; padding: 30px 0 10px; }
+  .success .check {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+    background: var(--yellow);
+    margin: 0 auto 22px;
+    position: relative;
+  }
+  .success .check::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    right: 26px;
+    width: 16px;
+    height: 30px;
+    border: solid var(--navy);
+    border-width: 0 5px 5px 0;
+    transform: rotate(45deg);
+  }
+  .success h2 {
+    color: var(--navy);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.8;
+  }
+  .roya-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 26px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    text-decoration: none;
+    direction: ltr;
+  }
+  .roya-footer img { height: 34px; }
+  .roya-footer .powered {
+    font-size: 12px;
+    font-weight: 600;
+    color: #8d99ad;
+    letter-spacing: 2px;
+  }
+  .roya-footer .brand {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--navy);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="ncc-logo.png" alt="كلية مركز النقب">
+
+    <div id="formView">
+      <h1>يرجى تعبئة البيانات الشخصية وسنتواصل معك لكافة التفاصيل</h1>
+      <form id="regForm">
+        <div class="field">
+          <input type="text" name="name" placeholder="الاسم الكامل *" required>
+        </div>
+        <div class="field">
+          <input type="tel" name="phone" placeholder="رقم الهاتف *" inputmode="tel" pattern="0(5\d|[2-4]|[8-9]|7[0-9])-?\d{7}" required>
+        </div>
+        <div class="field">
+          <input type="email" name="email" placeholder="البريد الالكتروني">
+        </div>
+        <div class="field">
+          <input type="text" name="town" placeholder="البلدة *" required>
+        </div>
+        <button type="submit">ارسال</button>
+      </form>
+      <p class="note">سيتم التواصل معك من قبل طاقم الكلية</p>
+    </div>
+
+    <div class="success" id="successView">
+      <div class="check"></div>
+      <h2>تم استلام طلبك بنجاح<br>وسنتواصل معك قريبا</h2>
+    </div>
+
+    <a class="roya-footer" href="https://www.instagram.com/roya360_" target="_blank" rel="noopener">
+      <span class="powered">POWERED BY</span>
+      <img src="roya-logo.png" alt="ROYA360">
+      <span class="brand">ROYA360</span>
+    </a>
+  </div>
+
+<script>
+  document.getElementById('regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('successView').style.display = 'block';
+  });
+</script>
+</body>
+</html>
