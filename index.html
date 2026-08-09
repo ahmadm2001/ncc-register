@@ -81,6 +81,30 @@
     box-shadow: 0 0 0 3px rgba(0, 53, 131, 0.12);
     background: #ffffff;
   }
+  select {
+    width: 100%;
+    font-family: 'Cairo', sans-serif;
+    font-size: 16px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background-color: #fbfcfe;
+    color: var(--ink);
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23003583' stroke-width='2' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 16px center;
+    cursor: pointer;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  select:focus {
+    outline: none;
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(0, 53, 131, 0.12);
+    background-color: #ffffff;
+  }
+  select.empty { color: #8d99ad; }
+  #otherField { display: none; }
   button {
     width: 100%;
     font-family: 'Cairo', sans-serif;
@@ -177,6 +201,19 @@
         <div class="field">
           <input type="text" name="town" placeholder="البلدة *" required>
         </div>
+        <div class="field">
+          <select name="major" id="majorSelect" class="empty" required>
+            <option value="" disabled selected>اختر التخصص *</option>
+            <option value="محاسبة">محاسبة</option>
+            <option value="ادارة اعمال">ادارة اعمال</option>
+            <option value="تصميم جرافيك">تصميم جرافيك</option>
+            <option value="تسويق رقمي">تسويق رقمي</option>
+            <option value="أخرى">أخرى</option>
+          </select>
+        </div>
+        <div class="field" id="otherField">
+          <input type="text" name="major_other" id="otherInput" placeholder="اكتب التخصص اللي تريده *">
+        </div>
         <button type="submit">ارسال</button>
       </form>
       <p class="note">سيتم التواصل معك من قبل طاقم الكلية</p>
@@ -197,6 +234,31 @@
   </a>
 
 <script>
+  var majorSelect = document.getElementById('majorSelect');
+  var otherField = document.getElementById('otherField');
+  var otherInput = document.getElementById('otherInput');
+
+  majorSelect.addEventListener('change', function () {
+    majorSelect.classList.remove('empty');
+    var isOther = majorSelect.value === 'أخرى';
+    otherField.style.display = isOther ? 'block' : 'none';
+    otherInput.required = isOther;
+    if (!isOther) otherInput.value = '';
+  });
+
+  // קישור פר מקצוע: ?major=... מסמן מראש את המקצוע מהמודעה
+  var params = new URLSearchParams(location.search);
+  var preMajor = params.get('major');
+  if (preMajor) {
+    for (var i = 0; i < majorSelect.options.length; i++) {
+      if (majorSelect.options[i].value === preMajor) {
+        majorSelect.value = preMajor;
+        majorSelect.classList.remove('empty');
+        break;
+      }
+    }
+  }
+
   document.getElementById('regForm').addEventListener('submit', function (e) {
     e.preventDefault();
     document.getElementById('formView').style.display = 'none';
